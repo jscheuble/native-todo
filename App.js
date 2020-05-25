@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
 
 export default function App() {
   const [input, setInput] = useState('');
@@ -10,7 +10,8 @@ export default function App() {
   }
 
   const addTodo = () => {
-    setTodos(currentState => [...currentState, input])
+    setTodos(currentState => [...currentState, input]);
+    setInput('')
   }
 
   return (
@@ -19,9 +20,9 @@ export default function App() {
         <TextInput placeholder='to do...' style={styles.input} onChangeText={inputHandler} />
         <Button title='add' onPress={addTodo} />
       </View>
-      <View>
-        {todos.map((e, i) => <Text key={i}>{e}</Text>)}
-      </View>
+      <ScrollView>
+        {todos.map((e, i) => <View key={i} style={styles.todo} ><Text >{e}</Text></View>)}
+      </ScrollView>
     </View>
   );
 }
@@ -29,7 +30,7 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 70,
-    backgroundColor: '#faf74d',
+    backgroundColor: '#a290d6',
     height: '100%',
   },
   inputContainer: {
@@ -43,5 +44,12 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     marginBottom: 10
+  },
+  todo: {
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: '#c3baf7',
+    borderColor: 'black',
+    borderWidth: 1,
   }
 });
